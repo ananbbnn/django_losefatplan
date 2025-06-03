@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}
+減肥計畫-建立計畫
+{% endblock %}
+
+{% block style %}
+{% endblock %}
+
+{% block body %}
+    <div class="plan-buttons">
+        <button id="create-plan" type="button"><span>建立新計畫</span></button>
+        <button id="modify-plan" type="button"><span>修改舊計畫</span></button>
+    </div>
+    <form action="" id="plan-form">
+        <div class="plan-info">
+            <table id="plan-table" border="5">
+                <tr>
+                    <td><label for="name">名稱:</label></td>
+                    <td><input type="text" id="name" name="name"></td>
+                    <td><label for="password">密碼:</label></td>
+                    <td><input type="password" id="password" name="password"></td>
+                </tr>
+                <tr>
+                    <td><label for="height">身高:</label></td>
+                    <td><input type="number" id="height" name="height"></td>
+                    <td><label for="weight">體重:</label></td>
+                    <td><input type="number" id="weight" name="weight"></td>
+                </tr>
+                <tr>
+                    <td><label for="startDate">開始日期:</label></td>
+                    <td><input type="date" id="startDate" name="startDate"></td>
+                    <td><label for="endDate">結束日期:</label></td>
+                    <td><input type="date" id="endDate" name="endDate"></td>
+                </tr>
+                <tr>
+                    <td><label for="monthGoal">每月目標:</label></td>
+                    <td><input type="number" id="monthGoal" name="monthGoal"></td>
+                    <td><label for="finalGoal">最終目標:</label></td>
+                    <td><input type="number" id="finalGoal" name="finalGoal"></td>
+                </tr>
+            </table>
+            <button type="submit">Submit</button> 
+        </div>     
+    </form>    
+{% endblock %}
+

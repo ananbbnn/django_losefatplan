@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+        {% endblock %}
+    </title>
+    <style>
+
+        body{
+            background-color: blanchedalmond;
+        }
+
+
+        .container{
+            width: 100%;
+            height: 100px;
+            background-color: blueviolet;
+            display: flex;
+        }
+        .main-title{
+            width: 325px;
+            height: 80px;
+            margin: 0px 10px;
+            padding: 10px 0px;
+            font-size: 2rem;
+            
+        }
+        .navigation{
+            float: right;
+            height: 100px;
+            flex: 1;
+            margin-top: 26px;
+        }
+        .navigation ul li{
+            display:inline-block;
+            margin: 0px 10px;
+            position: relative;
+            min-width: 160px;
+            background: transparent;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.7rem;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            text-transform: uppercase;
+            padding: 10px 20px;
+        }
+        .navigation ul li span {
+            color: #FFFFFF;
+            mix-blend-mode: difference;
+        }
+        .navigation ul li:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 52px;
+            height: 100%;
+            border-radius: 50px;
+            background: black;
+            transition: all 0.85s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        .navigation ul li:hover:before {
+        background: black;
+        width: 100%;
+        }
+
+    </style>
+
+    {% block style %}
+    {% endblock %}
+</head>
+<body>
+    {% load static %}
+    <div class="container">
+        <div class="main-title"><a href="/" ><img src="{% static 'images/main-title.png' %}" alt="減肥計畫"></a></div>
+        <nav class="navigation">
+            <ul>
+                <a href="{% url 'create_plan' %}"><li><span>建立計畫</span></li></a>
+                <a href="#"><li><span>查詢計畫</span></li></a>
+                <a href="#"><li><span>網站資訊</span></li></a>
+            </ul>
+        </nav>
+    </div>
+    <hr size="2" color="black">
+    {% block body %}
+    {% endblock %}
+</body>
+    
+</html>

@@ -27,56 +27,61 @@
 
 {% block body %}
     {% if user.is_authenticated %}
-        <form action="" id="plan-form">
-            <div class="plan-info">
-                <table id="plan-table" border="5">
-                    <tr>
-                        <td><label for="name">名稱:</label></td>
-                        <td><input type="text" id="name" name="name"></td>
-                        <td><label for="password">隱私:</label></td>
-                        <td>
-                            <input type="radio" id="public" name="visibility" value="public" checked>
-                            <label for="public">公開</label>
-                            <input type="radio" id="private" name="visibility" value="private">
-                            <label for="private">不公開</label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><label for="height">身高:</label></td>
-                        <td><input type="number" id="height" name="height"></td>
-                        <td><label for="weight">體重:</label></td>
-                        <td><input type="number" id="weight" name="weight"></td>
-                    </tr>
-                    <tr>
-                        <td><label for="startDate">開始日期:</label></td>
-                        <td><input type="date" id="startDate" name="startDate"></td>
-                        <td><label for="endDate">結束日期:</label></td>
-                        <td><input type="date" id="endDate" name="endDate"></td>
-                    </tr>
-                    <tr>
-                        <td><label for="monthGoal">每月目標:</label></td>
-                        <td><input type="number" id="monthGoal" name="monthGoal"></td>
-                        <td><label for="finalGoal">最終目標:</label></td>
-                        <td><input type="number" id="finalGoal" name="finalGoal"></td>
-                    </tr>
-                    <tr>
-                        <td><label for="description">描述:</label></td>
-                        <td colspan="3">
-                            <textarea id="description" name="description" rows="4" cols="50" maxlength="200" style="resize: none;"></textarea>
-                            <div id="desc-counter" style="font-size: 12px; color: #888;">0 / 200</div>
-                            <script>
-                                const desc = document.getElementById('description');
-                                const counter = document.getElementById('desc-counter');
-                                desc.addEventListener('input', function() {
-                                    counter.textContent = `${desc.value.length} / 200`;
-                                });
-                            </script>
-                        </td>
-                    </tr>
-                </table>
-                <button type="submit">Submit</button>
+    <div class="plan-info"></div>
+        <form action="" method="post">
+            {% csrf_token %}
+            
+            <table id="plan-table" border="5">
+                <tr>
+                    <td><label for="name">名稱:</label></td>
+                    <td><input type="text" id="name" name="name"></td>
+                    <td><label for="password">隱私:</label></td>
+                    <td>
+                        <input type="radio" id="public" name="visibility" value="public" checked>
+                        <label for="public">公開</label>
+                        <input type="radio" id="private" name="visibility" value="private">
+                        <label for="private">不公開</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="height">身高:</label></td>
+                    <td><input type="number" id="height" name="height"></td>
+                    <td><label for="weight">體重:</label></td>
+                    <td><input type="number" id="weight" name="weight"></td>
+                </tr>
+                <tr>
+                    <td><label for="startDate">開始日期:</label></td>
+                    <td><input type="date" id="startDate" name="startDate"></td>
+                    <td><label for="endDate">結束日期:</label></td>
+                    <td><input type="date" id="endDate" name="endDate"></td>
+                </tr>
+                <tr>
+                    <td><label for="monthGoal">每月目標:</label></td>
+                    <td><input type="number" id="monthGoal" name="monthGoal"></td>
+                    <td><label for="finalGoal">最終目標:</label></td>
+                    <td><input type="number" id="finalGoal" name="finalGoal"></td>
+                </tr>
+                <tr>
+                    <td><label for="description">描述:</label></td>
+                    <td colspan="3">
+                        <textarea id="description" name="description" rows="4" cols="50" maxlength="200" style="resize: none;"></textarea>
+                        <div id="desc-counter" style="font-size: 12px; color: #888;">0 / 200</div>
+                        <script>
+                            const desc = document.getElementById('description');
+                            const counter = document.getElementById('desc-counter');
+                            desc.addEventListener('input', function() {
+                                counter.textContent = `${desc.value.length} / 200`;
+                            });
+                        </script>
+                    </td>
+                </tr>
+            </table>
+            <div style="display: flex; justify-content: center; margin-top: 20px;">
+                <button type="submit" style="font-size: 1.5em; padding: 10px 40px;">Submit</button>
             </div>
+        
         </form>
+    </div>
     {% endif %}
 {% endblock %}
 

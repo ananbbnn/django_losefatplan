@@ -5,43 +5,78 @@
 {% endblock %}
 
 {% block style %}
+    <style>
+        #plan-form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .plan-info {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        #plan-table {
+            margin: 0 auto;
+        }
+    </style>
 {% endblock %}
 
+
 {% block body %}
-    <div class="plan-buttons">
-        <button id="create-plan" type="button"><span>建立新計畫</span></button>
-        <button id="modify-plan" type="button"><span>修改舊計畫</span></button>
-    </div>
-    <form action="" id="plan-form">
-        <div class="plan-info">
-            <table id="plan-table" border="5">
-                <tr>
-                    <td><label for="name">名稱:</label></td>
-                    <td><input type="text" id="name" name="name"></td>
-                    <td><label for="password">密碼:</label></td>
-                    <td><input type="password" id="password" name="password"></td>
-                </tr>
-                <tr>
-                    <td><label for="height">身高:</label></td>
-                    <td><input type="number" id="height" name="height"></td>
-                    <td><label for="weight">體重:</label></td>
-                    <td><input type="number" id="weight" name="weight"></td>
-                </tr>
-                <tr>
-                    <td><label for="startDate">開始日期:</label></td>
-                    <td><input type="date" id="startDate" name="startDate"></td>
-                    <td><label for="endDate">結束日期:</label></td>
-                    <td><input type="date" id="endDate" name="endDate"></td>
-                </tr>
-                <tr>
-                    <td><label for="monthGoal">每月目標:</label></td>
-                    <td><input type="number" id="monthGoal" name="monthGoal"></td>
-                    <td><label for="finalGoal">最終目標:</label></td>
-                    <td><input type="number" id="finalGoal" name="finalGoal"></td>
-                </tr>
-            </table>
-            <button type="submit">Submit</button> 
-        </div>     
-    </form>    
+    {% if user.is_authenticated %}
+        <form action="" id="plan-form">
+            <div class="plan-info">
+                <table id="plan-table" border="5">
+                    <tr>
+                        <td><label for="name">名稱:</label></td>
+                        <td><input type="text" id="name" name="name"></td>
+                        <td><label for="password">隱私:</label></td>
+                        <td>
+                            <input type="radio" id="public" name="visibility" value="public" checked>
+                            <label for="public">公開</label>
+                            <input type="radio" id="private" name="visibility" value="private">
+                            <label for="private">不公開</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="height">身高:</label></td>
+                        <td><input type="number" id="height" name="height"></td>
+                        <td><label for="weight">體重:</label></td>
+                        <td><input type="number" id="weight" name="weight"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="startDate">開始日期:</label></td>
+                        <td><input type="date" id="startDate" name="startDate"></td>
+                        <td><label for="endDate">結束日期:</label></td>
+                        <td><input type="date" id="endDate" name="endDate"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="monthGoal">每月目標:</label></td>
+                        <td><input type="number" id="monthGoal" name="monthGoal"></td>
+                        <td><label for="finalGoal">最終目標:</label></td>
+                        <td><input type="number" id="finalGoal" name="finalGoal"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="description">描述:</label></td>
+                        <td colspan="3">
+                            <textarea id="description" name="description" rows="4" cols="50" maxlength="200" style="resize: none;"></textarea>
+                            <div id="desc-counter" style="font-size: 12px; color: #888;">0 / 200</div>
+                            <script>
+                                const desc = document.getElementById('description');
+                                const counter = document.getElementById('desc-counter');
+                                desc.addEventListener('input', function() {
+                                    counter.textContent = `${desc.value.length} / 200`;
+                                });
+                            </script>
+                        </td>
+                    </tr>
+                </table>
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    {% endif %}
 {% endblock %}
 

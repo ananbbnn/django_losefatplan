@@ -9,34 +9,34 @@
         {% endblock %}
     </title>
     <style>
-
-        body{
-            background-color: blanchedalmond;
+        body {
+            background-color: #f4f7fa;
         }
 
-
-        .container{
+        .container {
             width: 100%;
             height: 100px;
-            background-color: blueviolet;
+            background-color: #3a506b;
             display: flex;
         }
-        .main-title{
+
+        .main-title {
             width: 325px;
             height: 80px;
             margin: 0px 10px;
             padding: 10px 0px;
             font-size: 2rem;
-            
         }
-        .navigation{
+
+        .navigation {
             float: right;
             height: 100px;
             flex: 1;
             margin-top: 26px;
         }
-        .navigation ul li{
-            display:inline-block;
+
+        .navigation ul li {
+            display: inline-block;
             margin: 0px 10px;
             position: relative;
             min-width: 160px;
@@ -50,10 +50,17 @@
             text-transform: uppercase;
             padding: 10px 20px;
         }
+
         .navigation ul li span {
-            color: #FFFFFF;
-            mix-blend-mode: difference;
+            color: #eaeaea;
+            mix-blend-mode: normal;
         }
+
+        .navigation ul li {
+            position: relative;
+            overflow: hidden;
+        }
+
         .navigation ul li:before {
             content: '';
             position: absolute;
@@ -62,28 +69,43 @@
             width: 52px;
             height: 100%;
             border-radius: 50px;
-            background: black;
+            background: #5bc0be;
             transition: all 0.85s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        }
-        .navigation ul li:hover:before {
-        background: black;
-        width: 100%;
+            z-index: 0;
         }
 
+        .navigation ul li:hover:before {
+            background: #1c2541;
+            width: 100%;
+        }
+
+        .navigation ul li span {
+            position: relative;
+            z-index: 1;
+            color: #eaeaea;
+            mix-blend-mode: normal;
+        }
     </style>
 
     {% block style %}
     {% endblock %}
 </head>
+
 <body>
     {% load static %}
     <div class="container">
-        <div class="main-title"><a href="/" ><img src="{% static 'images/main-title.png' %}" alt="減肥計畫"></a></div>
+        <div class="main-title"><a href="/"><img src="{% static 'images/main-title.png' %}" alt="減肥計畫"></a></div>
         <nav class="navigation">
             <ul>
-                <a href="{% url 'create_plan' %}"><li><span>建立計畫</span></li></a>
-                <a href="{% url 'view_plan' %}"><li><span>查詢計畫</span></li></a>
-                <a href="#"><li><span>網站資訊</span></li></a>
+                <a href="{% url 'create_plan' %}">
+                    <li><span>建立計畫</span></li>
+                </a>
+                <a href="{% url 'view_plan' %}">
+                    <li><span>查詢計畫</span></li>
+                </a>
+                <a href="#">
+                    <li><span>網站資訊</span></li>
+                </a>
             </ul>
         </nav>
         <nav class="nav-right">
@@ -101,5 +123,5 @@
     {% block body %}
     {% endblock %}
 </body>
-    
+
 </html>

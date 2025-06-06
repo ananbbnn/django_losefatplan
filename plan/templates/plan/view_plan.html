@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}
+減肥計畫-檢視計畫
+{% endblock %}
+
+{% block style %}
+
+{% endblock %}
+
+
+{% block body %}
+{% if plans %}
+<table border="1" cellpadding="8">
+    <tr>
+        <th>名稱</th>
+        <th>時間</th>
+        <th>身高 / 體重</th>
+        <th>月目標 / 最終目標</th>
+        <th>是否公開</th>
+        <th>描述</th>
+    </tr>
+    {% for plan in plans %}
+    <tr>
+        <td>{{ plan.name }}</td>
+        <td>{{ plan.start_time|date:"Y-m-d" }} ~ {{ plan.end_time|date:"Y-m-d" }}</td>
+        <td>{{ plan.height }}cm / {{ plan.weight }}kg</td>
+        <td>{{ plan.month_target }} → {{ plan.final_target }}</td>
+        <td>{{ plan.private|yesno:"否,是" }}</td>
+        <td>{{ plan.description|default:"(無)" }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>你尚未建立任何計畫。</p>
+{% endif %}
+
+{% endblock %}

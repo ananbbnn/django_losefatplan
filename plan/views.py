@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Plan
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def create_plan(request):
@@ -35,3 +36,17 @@ def create_plan(request):
     else:
         # Render the plan creation form
         return render(request, 'plan/create_plan.html')
+    
+
+
+@login_required
+def view_plan(request):
+    """
+    View to display a specific plan.
+    """
+    user = request.user
+    plans = Plan.objects.filter(user=user).order_by('-start_time')
+    if not plans:
+        return redirect('create_plan')
+
+    return render(request, 'plan/view_plan.html', {'plans': plans})

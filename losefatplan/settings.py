@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 import pymysql
+import os
+from dotenv import load_dotenv
 
 pymysql.install_as_MySQLdb()
 
@@ -27,6 +29,8 @@ SECRET_KEY = 'django-insecure-v1!)=ely+8p@_dx@7dg6-@)da&z^n95%(+%1pxf%p#5-u-=sc8
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+
+LOGIN_URL = '/user/login/'
 
 ALLOWED_HOSTS = []
 
@@ -85,14 +89,15 @@ DATABASES = {
     }
 }
 
+load_dotenv()
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME':'plan',
-        'USER':'root',
-        'PASSWORD':'12345678',
-        'HOST':'127.0.0.1',
-        'PORT':3306,
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': os.getenv('DB_PORT'),
     }
 }    
 # Password validation
